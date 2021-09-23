@@ -6,7 +6,7 @@ const ValidationErr = require('../errors/ValidationErr');
 
 module.exports.createUser = (req, res, next) => {
   const {
-    name, about, avatar, email, password,
+    name, email, password,
   } = req.body;
   bcrypt
     .hash(password, 10)
@@ -21,7 +21,7 @@ module.exports.createUser = (req, res, next) => {
       _id: user._id,
     }))
     .catch((err) => {
-      if (err.name === 'MongoError' && err.code === 11000) {
+      if (err.name === 'MongoServerError' && err.code === 11000) {
         next(new UserIsAlreadtExistsErr());
       } else if (err._message === 'user validation failed') {
         next(new ValidationErr());

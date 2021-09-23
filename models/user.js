@@ -28,8 +28,6 @@ const userSchema = new Schema({
   },
 });
 
-
-
 userSchema.statics.findUserByCredentials = function getUser(email, password) {
   return this.findOne({ email })
     .select('+password')

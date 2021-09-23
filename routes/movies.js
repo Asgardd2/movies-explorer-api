@@ -6,11 +6,10 @@ const {
   deleteMovie,
 } = require('../controllers/movies');
 
-
-router.get('/', getAllMovies);
+router.get('/movies/', getAllMovies);
 
 router.post(
-  '/',
+  '/movies/',
   celebrate({
     // валидируем параметр
     body: Joi.object().keys({
@@ -30,7 +29,7 @@ router.post(
   addMovie,
 );
 
-router.delete('/:movieId',
+router.delete('/movies/:movieId',
   celebrate({
   // валидируем параметр
     params: Joi.object().keys({
@@ -39,55 +38,3 @@ router.delete('/:movieId',
   }), deleteMovie);
 
 module.exports = router;
-/*
-const {
-  getAllCards,
-  createCard,
-  deleteCard,
-  setLike,
-  unsetLike,
-} = require('../controllers/movies');
-
-router.get('/', getAllCards);
-
-router.post(
-  '/',
-  celebrate({
-    // валидируем параметр
-    body: Joi.object().keys({
-      name: Joi.string().required().min(2).max(30),
-      link: Joi.string().required().pattern(/^(https?:\/\/)?([a-zA-z0-9%$&=?/.-]+)\.([a-zA-z0-9%$&=?/.-]+)([a-zA-z0-9%$&=?/.-]+)?(#)?$/),
-    }),
-  }),
-  createCard,
-);
-
-router.delete('/:cardId',
-  celebrate({
-  // валидируем параметр
-    params: Joi.object().keys({
-      cardId: Joi.string().length(24).hex(),
-    }),
-  }), deleteCard);
-
-router.put('/likes/:cardId', celebrate({
-  // валидируем параметр
-  params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex(),
-  }),
-}), setLike);
-
-router.delete('/likes/:cardId', celebrate({
-  // валидируем параметр
-  params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex(),
-  }),
-}), unsetLike);
-
-/*
-
-*/
-
-
-
-

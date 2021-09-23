@@ -17,7 +17,7 @@ module.exports.login = (req, res, next) => {
       // вернём токен
       res.send({ token });
     })
-    .catch((err) => {
+    .catch(() => {
       next(new IncorrectUserCredErr());
     });
 };
