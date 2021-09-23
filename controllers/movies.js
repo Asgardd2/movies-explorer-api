@@ -29,7 +29,6 @@ module.exports.getAllMovies = (req, res, next) => {
       } else {
         next(new UnknownErr(err.message));
       }
-
     });
 };
 

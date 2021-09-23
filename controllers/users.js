@@ -4,7 +4,6 @@ const ValidationErr = require('../errors/ValidationErr');
 const NotFoundObjErr = require('../errors/NotFoundObjErr');
 const UserIsAlreadtExistsErr = require('../errors/UserIsAlreadtExistsErr');
 
-
 module.exports.getUserData = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
@@ -49,8 +48,7 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'MongoServerError' && err.code === 11000) {
         next(new UserIsAlreadtExistsErr());
-      }
-      else if (err.name === 'CastError') {
+      } else if (err.name === 'CastError') {
         next(new ValidationErr());
       } else if (err.message === 'incorrect data') {
         next(new NotFoundObjErr());

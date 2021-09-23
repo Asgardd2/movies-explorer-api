@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const { NODE_ENV, DB_HOST } = process.env;
 const auth = require('./middlewares/auth');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 mongoose.connect(NODE_ENV === 'production' ? DB_HOST : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
